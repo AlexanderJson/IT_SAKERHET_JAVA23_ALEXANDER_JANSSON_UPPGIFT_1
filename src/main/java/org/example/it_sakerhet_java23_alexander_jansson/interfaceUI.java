@@ -41,11 +41,15 @@ public interface interfaceUI {
 
     default void searchBar(){}
     default void list(){}
-    default void errorAlert(String error){
-        System.out.println("ERROR: " + error);
+    default void Alert(String error){
+        System.out.println("ALERT: " + error);
     }
     default String breakLine(){
         return "------------------------------";
+    }
+
+    default String redirect(){
+        return "redirect:/";
     }
 
 
