@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class loginViewer {
     Scanner loginSc = new Scanner(System.in);
     LoggedIn auth = LoggedIn.getInstance();
-    boolean loggedIn = auth.getLoggedIn();
 
 
     private final UsersService usersService;
@@ -31,8 +30,9 @@ public class loginViewer {
         String username = scanner.nextLine();
         System.out.println("Please enter your password: ");
         String password = scanner.nextLine();
-        usersService.addNewUser(username,password);
-        System.out.println("User created!");
+
+            usersService.addNewUser(username,password);
+
     }
 
     public void loginMenu(){
