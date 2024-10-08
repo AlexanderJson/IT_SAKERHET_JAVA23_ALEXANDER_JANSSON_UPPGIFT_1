@@ -1,7 +1,7 @@
-package org.example.it_sakerhet_java23_alexander_jansson.repository.TRASH;
+package org.example.it_sakerhet_java23_alexander_jansson.viewer.trash.TRASH;
 
 import org.example.it_sakerhet_java23_alexander_jansson.interfaceUI;
-import org.example.it_sakerhet_java23_alexander_jansson.repository.UsersService;
+import org.example.it_sakerhet_java23_alexander_jansson.model.UsersService;
 
 import java.util.ArrayList;
 import java.util.List;

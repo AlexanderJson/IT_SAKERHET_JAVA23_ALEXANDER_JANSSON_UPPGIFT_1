@@ -1,15 +1,20 @@
-package org.example.it_sakerhet_java23_alexander_jansson.repository;
+package org.example.it_sakerhet_java23_alexander_jansson.model;
 
-import org.apache.catalina.User;
-import org.example.it_sakerhet_java23_alexander_jansson.model.Users;
+import org.example.it_sakerhet_java23_alexander_jansson.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsersService {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @Autowired
     private UsersRepository usersRepository;
@@ -23,9 +28,17 @@ public class UsersService {
         return userList;
     }
 
+
+    public Optional<Users> findUserByUsername(String username) {
+        System.out.println(username);
+        return usersRepository.findByUsername(username);
+    }
+
     public void addNewUser(String username, String password) {
         try{
-            Users user = new Users(username, password);
+            Users user = new Users();
+            user.setUsername(username);
+            user.setPassword(passwordEncoder.encode(password));
             usersRepository.save(user);
         }
 

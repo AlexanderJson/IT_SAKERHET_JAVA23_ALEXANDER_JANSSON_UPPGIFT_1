@@ -1,38 +1,58 @@
 package org.example.it_sakerhet_java23_alexander_jansson.viewer;
 
-import org.example.it_sakerhet_java23_alexander_jansson.repository.UsersService;
-import org.example.it_sakerhet_java23_alexander_jansson.utils.LoggedIn;
+import org.example.it_sakerhet_java23_alexander_jansson.model.Users;
+import org.example.it_sakerhet_java23_alexander_jansson.model.UsersService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.Scanner;
 
+@Component
 public class loginViewer {
     Scanner loginSc = new Scanner(System.in);
     LoggedIn auth = LoggedIn.getInstance();
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    private final UsersService usersService;
+    @Autowired
+    private UsersService usersService;
 
-    public loginViewer(UsersService usersService) {
-        this.usersService = usersService;
-        loginMenu();
-    }
+
 
     public void login(){
-        System.out.println("Enter username: ");
-        String username = loginSc.nextLine();
-        System.out.println("Enter password: ");
-        String password = loginSc.nextLine();
 
-    }
-    public void register(){
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Register: Please enter your username: ");
+        System.out.println("Please enter your username: ");
         String username = scanner.nextLine();
         System.out.println("Please enter your password: ");
         String password = scanner.nextLine();
 
-            usersService.addNewUser(username,password);
+        Optional<Users> checkLogin = usersService.findUserByUsername(username);
+        if (checkLogin.isPresent()) {
+            Users user = checkLogin.get();
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                auth.setLoggedIn(true);
+                System.out.println("Logged in!");
+            }
+            else {
+                System.out.println("Invalid username or password");
+            }
+        }else {
+            System.out.println("User " + username + " doesnt exist!");
+        }
 
+    }
+    public void register(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose a username: ");
+        String username = scanner.nextLine();
+        System.out.println("Choose a password: ");
+        String password = scanner.nextLine();
+        usersService.addNewUser(username,password);
     }
 
     public void loginMenu(){
@@ -41,7 +61,7 @@ public class loginViewer {
         while (loginChoice != 3){
             loginChoice = loginSc.nextInt();
             if (loginChoice == 1){
-                auth.setLoggedIn(true);
+                login();
             }
             else if (loginChoice == 2){
                 register();

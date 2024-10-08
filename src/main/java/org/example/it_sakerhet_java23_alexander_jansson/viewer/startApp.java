@@ -1,10 +1,11 @@
 package org.example.it_sakerhet_java23_alexander_jansson.viewer;
 
-import org.example.it_sakerhet_java23_alexander_jansson.repository.UsersService;
-import org.example.it_sakerhet_java23_alexander_jansson.utils.LoggedIn;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class startApp {
 
 
@@ -14,19 +15,15 @@ public class startApp {
     boolean loggedIn = auth.getLoggedIn();
 
 
-    private loginViewer loginPage;
+    private final loginViewer loginPage;
     private final homepageViewer homepage = new homepageViewer();
     private final userDataViewer userData = new userDataViewer();
     private final Scanner sc = new Scanner(System.in);
 
-    public startApp(UsersService usersService){
-        this.loginPage = new loginViewer(usersService);
+    @Autowired
+    public startApp(loginViewer loginPage){
 
-        if(loggedIn){
-            menuOptions();
-        } else {
-            loginPage.login();
-        }
+        this.loginPage = loginPage;
     }
 
 
