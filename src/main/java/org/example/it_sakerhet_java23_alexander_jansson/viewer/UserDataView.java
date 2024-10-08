@@ -7,30 +7,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Component
-public class App {
+public class UserDataView  {
 
     private final LoginService loginService;
     private UsersService usersService;
     private PasswordEncoder passwordEncoder;
-    private RegisterView registerView;
-    private NavigationView navigationView;
-    private UserDataView userDataView;
+
 
     @Autowired
-    public App(LoginService loginService, UsersService usersService, PasswordEncoder passwordEncoder, RegisterView registerView, NavigationView navigationView, UserDataView userDataView) {
+    public UserDataView(LoginService loginService, UsersService usersService, PasswordEncoder passwordEncoder) {
         this.loginService = loginService;
         this.usersService = usersService;
         this.passwordEncoder = passwordEncoder;
-        this.registerView = registerView;
-        this.navigationView = navigationView;
-        this.userDataView = userDataView;
-
-        userDataView.fetchData();
-
     }
 
+    public void fetchData(){
+        //session baserad
+        List<String> usersList = usersService.getAllUsers();
+        loginService.list("User data",usersList);
 
-
+    }
+    public void removeData(){}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,10 +21,12 @@ public class UsersService {
     private UsersRepository usersRepository;
 
 
-    public List<Users> getAllUsers() {
-        List<Users> userList = usersRepository.findAll();
-        for(Users user : userList) {
-            System.out.println(user.getPassword());
+    public List<String> getAllUsers() {
+        List<Users> userObjects = usersRepository.findAll();
+        List<String> userList = new ArrayList<>();
+        for(Users user : userObjects) {
+            String userData = "USERNAME: " + user.getUsername() + "\n" + "PASSWORD: " + passwordEncoder.encode(user.getPassword());
+            userList.add(userData);
         }
         return userList;
     }

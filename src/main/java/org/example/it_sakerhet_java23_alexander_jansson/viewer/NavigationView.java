@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Scanner;
 
 @Component
-public class NavigationView implements interfaceUI {
+public class NavigationView {
 
     private final LoginService loginService;
     private final LoginView loginView;
@@ -42,7 +42,7 @@ public class NavigationView implements interfaceUI {
                 registerView.Register();
             }
             else if (loginChoice == 3){
-                System.out.println("Exiting program");
+                loginService.Alert("Exiting program");
                 System.exit(0);
             }
     }
