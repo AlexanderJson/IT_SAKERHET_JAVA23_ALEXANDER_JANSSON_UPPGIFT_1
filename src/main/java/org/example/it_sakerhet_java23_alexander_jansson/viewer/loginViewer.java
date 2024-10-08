@@ -1,5 +1,6 @@
 package org.example.it_sakerhet_java23_alexander_jansson.viewer;
 
+import org.example.it_sakerhet_java23_alexander_jansson.repository.UsersService;
 import org.example.it_sakerhet_java23_alexander_jansson.utils.LoggedIn;
 
 import java.util.Scanner;
@@ -10,8 +11,11 @@ public class loginViewer {
     boolean loggedIn = auth.getLoggedIn();
 
 
-    public loginViewer(){
-    loginMenu();
+    private final UsersService usersService;
+
+    public loginViewer(UsersService usersService) {
+        this.usersService = usersService;
+        loginMenu();
     }
 
     public void login(){
@@ -22,12 +26,14 @@ public class loginViewer {
 
     }
     public void register(){
-        System.out.println("Choose username: ");
-        String username = loginSc.nextLine();
-        System.out.println("Choose password: ");
-        String password = loginSc.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Register: Please enter your username: ");
+        String username = scanner.nextLine();
+        System.out.println("Please enter your password: ");
+        String password = scanner.nextLine();
+        usersService.addNewUser(username,password);
+        System.out.println("User created!");
     }
-
 
     public void loginMenu(){
         System.out.println("Login menu: 1) LOGIN - 2) REGISTER - 3) EXIT");
