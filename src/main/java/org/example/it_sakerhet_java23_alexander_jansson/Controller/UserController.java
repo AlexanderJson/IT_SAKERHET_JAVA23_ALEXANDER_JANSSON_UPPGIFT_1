@@ -26,9 +26,14 @@ public class UserController  {
         return ResponseEntity.ok("User registered! ");
     }
 
-    @DeleteMapping("/delete")
-    public String deleteUser(){
-        return "test";
+    @DeleteMapping("/delete/{username}")
+    public ResponseEntity<String> deleteUser(@PathVariable String username){
+        boolean deleteSuccess = service.deleteUser(username);
+        if(deleteSuccess){
+            return ResponseEntity.ok("User deleted!");
+        }else {
+            return ResponseEntity.ok("Users not found!");
+        }
     }
 
 }

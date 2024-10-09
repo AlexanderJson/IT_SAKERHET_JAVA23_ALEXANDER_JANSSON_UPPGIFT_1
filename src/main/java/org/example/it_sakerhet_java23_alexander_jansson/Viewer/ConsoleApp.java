@@ -58,19 +58,10 @@ public class ConsoleApp {
         scanner = new Scanner(System.in);
         System.out.println("Enter Username: ");
         String username = scanner.next();
-        System.out.println("Enter Password: ");
-        String password = scanner.next();
-        System.out.println("Are you sure? This option is permanent..! Y/N ");
-        String answer = scanner.next();
-        switch(answer){
-            case "Y":
-                users.setUsername(username);
-                users.setPassword(password);
-                break;
-                case "N":
-                    getMenu();
-        }
-
+        /*System.out.println("Enter Password to delete: ");
+        String password = scanner.next();*/
+        restTemplate.delete("http://localhost:8081/delete/" + username);
+        System.out.println(username + " deleted");
 
     }
     public void viewUser(){

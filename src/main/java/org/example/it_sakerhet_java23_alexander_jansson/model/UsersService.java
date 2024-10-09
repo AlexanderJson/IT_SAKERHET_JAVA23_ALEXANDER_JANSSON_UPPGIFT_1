@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsersService {
 
@@ -21,5 +23,15 @@ public class UsersService {
         user.setUsername(username);
         user.setPassword(password);
         return usersRepository.save(user);
+    }
+
+    public boolean deleteUser(String username) {
+        Optional<Users> user = usersRepository.findByUsername(username);
+        if (user.isPresent()) {
+            usersRepository.delete(user.get());
+            return true;
+        }else{
+            return false;
+        }
     }
 }
