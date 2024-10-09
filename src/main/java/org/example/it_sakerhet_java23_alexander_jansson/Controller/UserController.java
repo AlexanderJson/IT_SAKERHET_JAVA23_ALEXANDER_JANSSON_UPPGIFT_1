@@ -20,7 +20,6 @@ public class UserController  {
     private UsersService usersService;
 
     //skapa
-    @PostMapping("/Register")
-    public ResponseEntity<Users> register(@RequestBody Users user) {}
+
 
 }
