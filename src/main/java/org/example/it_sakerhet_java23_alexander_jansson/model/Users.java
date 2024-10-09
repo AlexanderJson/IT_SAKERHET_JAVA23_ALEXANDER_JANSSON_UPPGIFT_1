@@ -10,7 +10,6 @@ public class Users {
     private Long id;
     private String username;
 
-    @Column(nullable = false)
     private String password;
 
     public Users() {}
