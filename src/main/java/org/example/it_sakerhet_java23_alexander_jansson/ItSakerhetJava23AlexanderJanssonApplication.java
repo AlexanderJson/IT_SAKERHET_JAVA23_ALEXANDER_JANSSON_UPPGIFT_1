@@ -1,7 +1,8 @@
 package org.example.it_sakerhet_java23_alexander_jansson;
 
+import org.example.it_sakerhet_java23_alexander_jansson.Controller.UserController;
+import org.example.it_sakerhet_java23_alexander_jansson.model.Users;
 import org.example.it_sakerhet_java23_alexander_jansson.model.UsersService;
-import org.example.it_sakerhet_java23_alexander_jansson.viewer.App;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -17,9 +18,10 @@ public class ItSakerhetJava23AlexanderJanssonApplication {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(ItSakerhetJava23AlexanderJanssonApplication.class, args);
-        UsersService usersService = context.getBean(UsersService.class);
 
-        App app = context.getBean(App.class);
+        UserController userController = (UserController) context.getBean("userController");
+
+
     }
 
 

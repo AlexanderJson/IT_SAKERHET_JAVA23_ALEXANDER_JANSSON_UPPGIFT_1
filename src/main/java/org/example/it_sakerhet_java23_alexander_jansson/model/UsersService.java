@@ -20,6 +20,8 @@ public class UsersService {
     @Autowired
     private UsersRepository usersRepository;
 
+    @Autowired
+    private UIRepository uiRepository;
 
     public List<String> getAllUsers() {
         List<Users> userObjects = usersRepository.findAll();
@@ -30,6 +32,7 @@ public class UsersService {
         }
         return userList;
     }
+
 
 
     public Optional<Users> findUserByUsername(String username) {
@@ -45,15 +48,15 @@ public class UsersService {
             usersRepository.save(user);
         }
 
-            catch (DataIntegrityViolationException e){
+        catch (DataIntegrityViolationException e){
             System.out.println("Username already exists");
 
         }
 
     }
 
-    //använd global session
     public void removeUser(Users user) {
+
         usersRepository.delete(user);
     }
 }
