@@ -13,7 +13,6 @@ import java.util.Optional;
 @RestController
 public class getUserController {
 
-    private final Users users = new Users();
     private final UsersService service;
 
 

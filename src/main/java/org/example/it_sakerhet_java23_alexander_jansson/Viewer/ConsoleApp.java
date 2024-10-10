@@ -22,7 +22,7 @@ public class ConsoleApp {
 
     public void getMenu(){
         System.out.println("Choose option: ");
-        System.out.println("1) Register  -  2) Delete  -  3) View User");
+        System.out.println("1) Register  -  2) Delete  -  3) Search user");
         int option = scanner.nextInt();
         switch(option){
             case 1:
@@ -33,11 +33,12 @@ public class ConsoleApp {
                     break;
                 case 3:
                     SearchByUsername();
-
         }
     }
 
-    public void registerUser(){
+
+
+        public void registerUser(){
         System.out.println("Enter Username: ");
         String username = scanner.next();
         System.out.println("Enter Password: ");

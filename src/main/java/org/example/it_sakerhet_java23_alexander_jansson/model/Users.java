@@ -1,5 +1,6 @@
 package org.example.it_sakerhet_java23_alexander_jansson.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +11,7 @@ public class Users {
     private Long id;
     private String username;
 
+    @JsonIgnore
     private String password;
 
     public Users() {}
