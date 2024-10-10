@@ -14,7 +14,7 @@ public class Users {
     private String password;
     private String email;
     private String hometown;
-
+    public Users() {}
 
 
 
@@ -36,7 +36,6 @@ public class Users {
 
 
 
-    public Users() {}
 
     public String getPassword() {
         return password;

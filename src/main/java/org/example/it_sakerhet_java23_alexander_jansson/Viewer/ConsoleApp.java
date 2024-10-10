@@ -67,7 +67,7 @@ public class ConsoleApp {
     }
 
 
-
+    public void login(){}
 
     public void deleteUser(){
         scanner = new Scanner(System.in);
