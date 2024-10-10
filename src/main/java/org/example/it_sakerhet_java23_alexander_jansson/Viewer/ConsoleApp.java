@@ -4,8 +4,10 @@ import org.example.it_sakerhet_java23_alexander_jansson.model.Users;
 import org.example.it_sakerhet_java23_alexander_jansson.model.UsersDTO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Scanner;
@@ -51,8 +53,9 @@ public class ConsoleApp {
 
 
     public void getMenu(){
-        System.out.println("Choose option: ");
-        System.out.println("1) Register  -  2) Delete  -  3) Search user");
+        System.out.println("Use the console commands for POST");
+        System.out.println("1) Register  -  2) Delete  -  3) Search user 4) Get endpoints ");
+
         int option = scanner.nextInt();
         switch(option){
             case 1:
@@ -63,11 +66,11 @@ public class ConsoleApp {
                     break;
                 case 3:
                     SearchByUsername();
+
         }
     }
 
 
-    public void login(){}
 
     public void deleteUser(){
         scanner = new Scanner(System.in);
@@ -75,10 +78,16 @@ public class ConsoleApp {
         String username = scanner.next();
         /*System.out.println("Enter Password to delete: ");
         String password = scanner.next();*/
-        restTemplate.delete("http://localhost:8081/delete/" + username);
-        System.out.println(username + " deleted");
-        getMenu();
+        try{
+            restTemplate.delete("http://localhost:8081/delete/" + username);
+            System.out.println(username + " deleted");
+        }catch(HttpClientErrorException e){
+            if (e.getStatusCode() == HttpStatus.UNAUTHORIZED){
+                System.out.println(e.getResponseBodyAsString());
+            }
+        }
 
+        getMenu();
     }
 
     public void SearchByUsername(){
@@ -88,7 +97,8 @@ public class ConsoleApp {
 
         try{
             UsersDTO user = restTemplate.getForObject("http://localhost:8081/search/" + username, UsersDTO.class);
-            System.out.println("Found user: ");
+            System.out.println("Found user: " + user.getUsername());
+            System.out.println("VIEW JSON: http://localhost:8081/search/" + user.getUsername());
             getMenu();
 
         }catch (Exception e){

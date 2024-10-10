@@ -1,6 +1,5 @@
 package org.example.it_sakerhet_java23_alexander_jansson.Controller;
 
-import org.example.it_sakerhet_java23_alexander_jansson.model.Users;
 import org.example.it_sakerhet_java23_alexander_jansson.model.UsersDTO;
 import org.example.it_sakerhet_java23_alexander_jansson.model.UsersService;
 import org.springframework.http.HttpStatus;

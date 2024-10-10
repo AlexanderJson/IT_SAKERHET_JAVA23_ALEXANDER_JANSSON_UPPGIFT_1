@@ -1,5 +1,7 @@
 package org.example.it_sakerhet_java23_alexander_jansson.model;
 
+// DTO as an added layer of security
+
 public class UsersDTO {
     private String username;
     private String email;

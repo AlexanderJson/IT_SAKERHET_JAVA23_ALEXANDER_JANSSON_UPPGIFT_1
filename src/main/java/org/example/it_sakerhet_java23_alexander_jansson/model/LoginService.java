@@ -8,10 +8,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
-public class LoginManager implements UserDetailsService {
+public class LoginService implements UserDetailsService {
 
     @Autowired
     private UsersRepository usersRepository;

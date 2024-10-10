@@ -20,7 +20,7 @@ public class postUserController {
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Users user){
         service.registerUser(user.getUsername(), user.getPassword(), user.getEmail(), user.getHometown());
-        return ResponseEntity.ok("User registered! ");
+        return (ResponseEntity.ok("User registered! "));
     }
 
     @DeleteMapping("/delete/{username}")

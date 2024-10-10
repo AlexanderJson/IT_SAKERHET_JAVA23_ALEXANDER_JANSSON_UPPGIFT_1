@@ -20,7 +20,8 @@ public class UsersService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Users registerUser(String username, String password,String email, String hometown) {
+
+    public Users registerUser(String username, String password, String email, String hometown) {
         Users user = new Users();
         user.setUsername(username);
         String hashedPass = passwordEncoder.encode(password);
