@@ -31,8 +31,9 @@ public class ConsoleApp {
                 case 2:
                     deleteUser();
                     break;
-                    case 3:
-                        viewUser();
+                case 3:
+                    SearchByUsername();
+
         }
     }
 
@@ -64,14 +65,21 @@ public class ConsoleApp {
         System.out.println(username + " deleted");
 
     }
-    public void viewUser(){
+
+    public void SearchByUsername(){
         scanner = new Scanner(System.in);
         System.out.println("Enter Username: ");
         String username = scanner.next();
-        System.out.println("Enter Password: ");
-        String password = scanner.next();
-        users.setUsername(username);
-        users.setPassword(password);
+
+        try{
+            Users user = restTemplate.getForObject("http://localhost:8081/search/" + username, Users.class);
+            System.out.println("Found user: " + user.getUsername());
+        }catch (Exception e){
+            System.out.println(username + " not found");
+        }
     }
+
+
+
 
 }
