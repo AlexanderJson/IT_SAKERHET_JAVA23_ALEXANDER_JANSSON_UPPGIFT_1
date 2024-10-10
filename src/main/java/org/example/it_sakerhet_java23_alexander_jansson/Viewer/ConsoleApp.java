@@ -20,6 +20,29 @@ public class ConsoleApp {
         this.restTemplate = new RestTemplate();
     }
 
+
+
+    public void registerUser(){
+
+        System.out.println("Enter Username: ");
+        String username = scanner.next();
+        System.out.println("Enter Password: ");
+        String password = scanner.next();
+
+        Users user = new Users();
+        user.setUsername(username);
+        user.setPassword(password);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Users> req = new HttpEntity<>(user, headers);
+
+        String resp = restTemplate.postForObject("http://localhost:8081/register", req, String.class);
+        System.out.println(resp);
+    }
+
+
     public void getMenu(){
         System.out.println("Choose option: ");
         System.out.println("1) Register  -  2) Delete  -  3) Search user");
@@ -38,24 +61,7 @@ public class ConsoleApp {
 
 
 
-        public void registerUser(){
-        System.out.println("Enter Username: ");
-        String username = scanner.next();
-        System.out.println("Enter Password: ");
-        String password = scanner.next();
 
-        Users user = new Users();
-        users.setUsername(username);
-        users.setPassword(password);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<Users> req = new HttpEntity<>(users, headers);
-
-        String resp = restTemplate.postForObject("http://localhost:8081/register", req, String.class);
-        System.out.println(resp);
-    }
     public void deleteUser(){
         scanner = new Scanner(System.in);
         System.out.println("Enter Username: ");

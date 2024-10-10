@@ -11,15 +11,10 @@ public class Users {
     private Long id;
     private String username;
 
-    @JsonIgnore
     private String password;
 
     public Users() {}
 
-    public Users(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
     public String getPassword() {
         return password;
     }
