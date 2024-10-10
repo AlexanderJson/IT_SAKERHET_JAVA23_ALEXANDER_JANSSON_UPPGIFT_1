@@ -6,7 +6,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Scanner;
@@ -47,6 +46,7 @@ public class ConsoleApp {
 
         String resp = restTemplate.postForObject("http://localhost:8081/register", req, String.class);
         System.out.println(resp);
+        getMenu();
     }
 
 
@@ -77,6 +77,7 @@ public class ConsoleApp {
         String password = scanner.next();*/
         restTemplate.delete("http://localhost:8081/delete/" + username);
         System.out.println(username + " deleted");
+        getMenu();
 
     }
 
@@ -88,9 +89,12 @@ public class ConsoleApp {
         try{
             UsersDTO user = restTemplate.getForObject("http://localhost:8081/search/" + username, UsersDTO.class);
             System.out.println("Found user: ");
+            getMenu();
+
         }catch (Exception e){
             System.out.println(username + " not found");
             e.printStackTrace();
+            getMenu();
         }
     }
 
