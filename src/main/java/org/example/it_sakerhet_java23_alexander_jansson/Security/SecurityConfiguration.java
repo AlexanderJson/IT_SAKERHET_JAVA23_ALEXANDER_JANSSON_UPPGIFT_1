@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,14 +30,10 @@ public class SecurityConfiguration  {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/register").permitAll()
+                        .requestMatchers("/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                .exceptionHandling(exception ->
-                        exception.accessDeniedHandler(accessDeniedHandler())
-                )
-                .formLogin(form -> form
-                        .loginPage("/login").permitAll()
-                )
+                .formLogin(loginForm -> loginForm.permitAll().defaultSuccessUrl("/homepage"))
                 .logout(LogoutConfigurer::permitAll)
                 .userDetailsService(loginManager);
         ;
@@ -52,10 +49,5 @@ public class SecurityConfiguration  {
     }
 
     // handles exception of when user is denied access to resource
-    @Bean
-    public   AccessDeniedHandler accessDeniedHandler() {
-        return (request, response, accessDeniedException) -> {
-            response.sendRedirect("/accessDenied");
-        };
-    }
+
     }
