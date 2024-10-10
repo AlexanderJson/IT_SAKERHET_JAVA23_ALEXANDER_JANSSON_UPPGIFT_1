@@ -1,6 +1,7 @@
 package org.example.it_sakerhet_java23_alexander_jansson.Controller;
 
 import org.example.it_sakerhet_java23_alexander_jansson.model.Users;
+import org.example.it_sakerhet_java23_alexander_jansson.model.UsersDTO;
 import org.example.it_sakerhet_java23_alexander_jansson.model.UsersService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,8 @@ public class getUserController {
     }
 
     @GetMapping("/search/{username}")
-    public ResponseEntity<Users> search(@PathVariable String username) {
-        Optional<Users> foundUser = service.searchByUsername(username);
+    public ResponseEntity<UsersDTO> search(@PathVariable String username) {
+        Optional<UsersDTO> foundUser = service.findUsername(username);
         return foundUser.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

@@ -41,4 +41,8 @@ public class UsersService {
     public Optional<Users> searchByUsername(String username) {
         return usersRepository.findByUsername(username);
     }
+
+    public Optional<UsersDTO> findUsername(String username) {
+        return usersRepository.findByUsernameDTO(username);
+    }
 }
