@@ -1,6 +1,7 @@
 package org.example.it_sakerhet_java23_alexander_jansson.Viewer;
 
 import org.example.it_sakerhet_java23_alexander_jansson.model.Users;
+import org.example.it_sakerhet_java23_alexander_jansson.model.UsersDTO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -28,10 +29,16 @@ public class ConsoleApp {
         String username = scanner.next();
         System.out.println("Enter Password: ");
         String password = scanner.next();
+        System.out.println("Enter Email: ");
+        String email = scanner.next();
+        System.out.println("Enter Hometown: ");
+        String hometown = scanner.next();
 
         Users user = new Users();
         user.setUsername(username);
         user.setPassword(password);
+        user.setEmail(email);
+        user.setHometown(hometown);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -79,10 +86,11 @@ public class ConsoleApp {
         String username = scanner.next();
 
         try{
-            Users user = restTemplate.getForObject("http://localhost:8081/search/" + username, Users.class);
-            System.out.println("Found user: " + user.getUsername());
+            UsersDTO user = restTemplate.getForObject("http://localhost:8081/search/" + username, UsersDTO.class);
+            System.out.println("Found user: ");
         }catch (Exception e){
             System.out.println(username + " not found");
+            e.printStackTrace();
         }
     }
 

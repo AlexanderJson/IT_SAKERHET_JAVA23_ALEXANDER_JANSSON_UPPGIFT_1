@@ -15,6 +15,6 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     Optional<Users> findByUsername(String username);
 
-    @Query("SELECT new org.example.it_sakerhet_java23_alexander_jansson.model.UsersDTO(u.username) FROM Users u WHERE u.username = :username")
+    @Query("SELECT new org.example.it_sakerhet_java23_alexander_jansson.model.UsersDTO(u.username, u.email, u.hometown) FROM Users u WHERE u.username = :username")
     Optional<UsersDTO> findByUsernameDTO(@Param("username") String username);
 }
